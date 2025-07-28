@@ -1,5 +1,5 @@
 import React from 'react'
-import Container from './container/Container'
+import Container from './Container'
 import Logo from './Logo'
 import Logoutbtn from './Logoutbtn'
 import { useSelector } from 'react-redux'

@@ -78,7 +78,7 @@ const router = createBrowserRouter([
     ],
 },
 ])
-
+console.log(import.meta.env.VITE_APPWRITE_URL)
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
