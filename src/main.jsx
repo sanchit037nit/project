@@ -7,12 +7,12 @@ import store from './store/store.js'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Home from './pages/Home.jsx'
 import AuthLayout from './components/AuthLayout.jsx'
-import LoginP from './pages/Loginp.jsx'
+import Loginp from './pages/Loginp.jsx'
 
 
 
 import AddPost from "./pages/AddPost";
-import Signup from './pages/Signup'
+import Signupp from './pages/Signupp.jsx'
 import EditPost from "./pages/EditPost";
 
 import Post from "./pages/Post";
@@ -32,7 +32,7 @@ const router = createBrowserRouter([
             path: "/login",
             element: (
                 <AuthLayout authentication={false}>
-                    <LoginP />
+                    <Loginp />
                 </AuthLayout>
             ),
         },
@@ -40,7 +40,7 @@ const router = createBrowserRouter([
             path: "/signup",
             element: (
                 <AuthLayout authentication={false}>
-                    <Signup />
+                    <Signupp />
                 </AuthLayout>
             ),
         },

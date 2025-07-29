@@ -6,6 +6,7 @@ import {useDispatch} from "react-redux"
 import Button from './Button'
 import authService from '../appwrite/auth.js'
 import {useForm} from "react-hook-form"
+import Input from './Input.jsx'
 
 const Signup = () => {
         const navigate=useNavigate()
@@ -14,21 +15,19 @@ const Signup = () => {
         const [error,setError]=useState("")
 
          const signup=async(data)=>{
-        setError("")
-     try {
-     
-        
-            const userdata=await authService.createaccount(data)
-            if(userdata){
+           setError("")
+           try {
+              const userdata=await authService.createaccount(data)
+              if(userdata){
                 const userData= await authService.getCurrentUser()
                 if(userData) dispatch(login(userData))
                     navigate("/")
-            }
+              }
         
-     } catch (error) {
-        setError(error.message)
-     }
-    }
+            } catch (error) {
+                  setError(error.message)
+            }
+        }
 
     return (
     <div className="flex items-center justify-center">
@@ -50,7 +49,7 @@ const Signup = () => {
                 </p>
                 {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
 
-                <form onSubmit={handleSubmit(Signup)}>
+                <form onSubmit={handleSubmit(signup)}>
                     <div className='space-y-5'>
                         <Input
                         label="Full Name: "
