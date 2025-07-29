@@ -14,12 +14,14 @@ export default function Post() {
 
     const userData = useSelector((state) => state.auth.userData);
 
-    const isAuthor = post && userData ? post.userId === userData.$id : false;
-    console.log(post)
+    const isAuthor = post && userData ? post.userid === userData.$id : false;
+  
 
     useEffect(() => {
         if (slug) {
             appwriteService.getPost(slug).then((post) => {
+                console.log("Post data:", post);
+
                 if (post) setPost(post);
                 else navigate("/");
             });
@@ -27,6 +29,7 @@ export default function Post() {
     }, [slug, navigate]);
 
     const deletePost = () => {
+       
         appwriteService.DeletePost(post.$id).then((status) => {
             if (status) {
                 appwriteService.deleteFile(post.featuredimage);
@@ -34,11 +37,13 @@ export default function Post() {
             }
         });
     };
-
+    // console.log(slug)
+//    console.log(appwriteService.getFilePreview(post.featuredimage))
     return post ? (
         <div className="py-8">
             <Container>
                 <div className="w-full flex justify-center mb-4 relative border rounded-xl p-2">
+                    
                     <img
                         src={appwriteService.getFilePreview(post.featuredimage)}
                         alt={post.title}

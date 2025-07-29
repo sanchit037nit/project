@@ -10,7 +10,7 @@ export class Service{
         this.client
                     .setEndpoint(conf. appwriteUrl)
                     .setProject(conf.appwriteProjectId)
-        this.databses= new Databases(this.client)
+        this.databases= new Databases(this.client)
         this.bucket= new Storage(this.client)
     }
 
@@ -18,7 +18,7 @@ export class Service{
      title,slug,content,featuredimage,status,userid
     }){
         try {
-            return await this.databses.createDocument(
+            return await this.databases.createDocument(
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId,
                 slug, //slug as documentid
@@ -35,7 +35,7 @@ export class Service{
      title,content,featuredimage,status,userid
     }){
         try {
-            return await this.databses.updateDocument(
+            return await this.databases.updateDocument(
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId,
                 slug, //slug as documentid
@@ -50,7 +50,7 @@ export class Service{
 
     async DeletePost(slug){
         try {
-           await this.databses.deleteDocument(
+           await this.databases.deleteDocument(
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId,
                 slug
@@ -64,12 +64,12 @@ export class Service{
 
     async getPost(slug){
         try {
-           await this.databses.getDocument(
+           return await this.databases.getDocument(
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId,
                 slug
             )
-            return true
+         
         } catch (error) {
             throw error
             return false
@@ -78,7 +78,7 @@ export class Service{
 
       async getPosts(queries = [Query.equal("status", "active")]){
         try {
-            return await this.databses.listDocuments(
+            return await this.databases.listDocuments(
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId,
                 queries,
@@ -118,6 +118,7 @@ export class Service{
     }
 
     getFilePreview(fileId){
+        console.log(fileId)
         return this.bucket.getFilePreview(
             conf.appwriteBucketId,
             fileId
